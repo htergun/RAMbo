@@ -1,15 +1,17 @@
 using RAMbo.App.Models;
-using RAMbo.App.Services.Interfaces;
 
 namespace RAMbo.App.Services.Algorithms;
 
-// TODO (Hafta 7): Bu sınıfı ilgili kişi dolduracak.
-public class FirstFit : IPartitionAlgorithm
+/// <summary>İlk uygun (yeterince büyük) bloğa yerleştirir.</summary>
+public class FirstFit : PartitionAlgorithmBase
 {
-    public string Name => "First Fit";
+    public override string Name => "First Fit";
 
-    public PartitionResult Run(List<MemoryBlock> blocks, List<ProcessInfo> processes)
+    protected override int SelectBlock(int[] available, int processSize)
     {
-        throw new NotImplementedException("First Fit Hafta 7'de yazılacak.");
+        for (int i = 0; i < available.Length; i++)
+            if (available[i] >= processSize)
+                return i;
+        return -1;
     }
 }

@@ -17,4 +17,9 @@ public class SimulationRunner
         if (save) _repo.SavePageReplacement(result);
         return result;
     }
+
+    public PartitionResult RunPartitioning(IPartitionAlgorithm algo, List<MemoryBlock> blocks, List<ProcessInfo> processes)
+    {
+        return algo.Run(blocks, processes);
+    }
 }

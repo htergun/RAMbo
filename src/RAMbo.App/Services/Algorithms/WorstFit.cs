@@ -1,15 +1,20 @@
 using RAMbo.App.Models;
-using RAMbo.App.Services.Interfaces;
 
 namespace RAMbo.App.Services.Algorithms;
 
-// TODO (Hafta 7): Bu sınıfı ilgili kişi dolduracak.
-public class WorstFit : IPartitionAlgorithm
+/// <summary>Sığan en büyük bloğa yerleştirir.</summary>
+public class WorstFit : PartitionAlgorithmBase
 {
-    public string Name => "Worst Fit";
+    public override string Name => "Worst Fit";
 
-    public PartitionResult Run(List<MemoryBlock> blocks, List<ProcessInfo> processes)
+    protected override int SelectBlock(int[] available, int processSize)
     {
-        throw new NotImplementedException("Worst Fit Hafta 7'de yazılacak.");
+        int worst = -1;
+        for (int i = 0; i < available.Length; i++)
+        {
+            if (available[i] < processSize) continue;
+            if (worst == -1 || available[i] > available[worst]) worst = i;
+        }
+        return worst;
     }
 }
