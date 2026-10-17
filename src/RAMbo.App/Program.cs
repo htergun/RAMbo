@@ -54,12 +54,13 @@ foreach (var step in optResult.Steps)
 Console.WriteLine($"\nPage Fault: {optResult.PageFaults} | Hit: {optResult.Hits} | Hit Ratio: {optResult.HitRatio}%");
 
 // Karsilastirma tablosu (LRU hazir oldugunda aktif edilecek)
-// IPageReplacementAlgorithm[] algorithms = [new FifoAlgorithm(), new LruAlgorithm(), new OptimalAlgorithm()];
-// Console.WriteLine("\n=== KARSILASTIRMA RAPORU ===");
-// Console.WriteLine($"{"Algoritma",-12} | {"Page Fault",10} | {"Hit",6} | {"Hit Ratio",10}");
-// Console.WriteLine(new string('-', 48));
-// foreach (var algo in algorithms)
-// {
-//     var r = runner.RunPageReplacement(algo, refs, frameCount, save: false);
-//     Console.WriteLine($"{r.AlgorithmName,-12} | {r.PageFaults,10} | {r.Hits,6} | {r.HitRatio,9}%");
-// }
+IPageReplacementAlgorithm[] algorithms = [new FifoAlgorithm(), new LruAlgorithm(), new OptimalAlgorithm()];
+Console.WriteLine("\n=== KARSILASTIRMA RAPORU ===");
+Console.WriteLine($"{"Algoritma",-12} | {"Page Fault",10} | {"Hit",6} | {"Hit Ratio",10}");
+Console.WriteLine(new string('-', 48));
+foreach (var algo in algorithms)
+{
+    var r = runner.RunPageReplacement(algo, refs, frameCount, save: false);
+    Console.WriteLine($"{r.AlgorithmName,-12} | {r.PageFaults,10} | {r.Hits,6} | {r.HitRatio,9}%");
+}
+Console.ReadLine();
